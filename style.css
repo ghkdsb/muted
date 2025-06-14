@@ -1,0 +1,257 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Galmuri7', sans-serif;
+}
+
+#map {
+    position: relative;
+    width: 2700px;
+    height: 2000px;
+    background: url('img/배경.png') no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#npc2 {
+    position: absolute;
+    transform: translate(143rem, -42.5rem);
+    width: 115px;
+    height: 160px;
+    background: url('img/npc2.png') no-repeat;
+}
+
+/* 할머니 이동 */
+.box {
+    position: absolute;
+    top: 500px;
+    left: 1000px;
+    width: 130px;
+    height: 150px;
+    background: url('img/player.png') no-repeat;
+}
+
+.box[data-direction='left'] {
+    background-position: 0 -450px;
+}
+
+.box[data-direction='right'] {
+    background-position: 0 -150px;
+}
+
+.box[data-direction='up'] {
+    background-position: 0 -300px;
+}
+
+.box[data-direction='down'] {
+    background-position: 0 0;
+}
+
+.box[data-walking='true'] {
+    animation: walking 0.6s steps(4) infinite;
+}
+
+@keyframes walking {
+    from {
+        background-position-x: 0;
+    }
+
+    to {
+        background-position-x: -520px;
+    }
+}
+
+/* 대화창 */
+.dialogue-box {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    width: 800px;
+    height: 200px;
+    z-index: 999;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.dialogue-bg {
+    position: absolute;
+    transform: translate(-95px, 10px);
+    width: 130%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.dialogue-name {
+    transform: translate(1rem, -0.2rem);
+    z-index: 2;
+    font-size: 25px;
+    font-weight: bold;
+    color: #415162;
+    margin-bottom: 10px;
+    font-family: 'Galmuri7', sans-serif;
+}
+
+.dialogue-text {
+    transform: translateY(0.5rem);
+    z-index: 2;
+    font-size: 24px;
+    font-weight: normal;
+    /* text-align: center; */
+    padding: 0 20px;
+    font-family: 'Galmuri7', sans-serif;
+    color: #333;
+}
+
+/* 오브젝트 찾기 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sparkle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.sparkle1 {
+  top: 1130px;
+  left: 155px;
+}
+
+.sparkle2 {
+  top: 256px;
+  left: 544px;
+}
+
+.sparkle3 {
+  top: 1105px;
+  left: 1205px;
+}
+
+.sparkle4 {
+  top: 1360px;
+  left: 2130px;
+}
+
+.sparkle5 {
+  top: 250px;
+  left: 1405px;
+}
+
+ul {
+    list-style: none;
+}
+
+@keyframes find {
+    30% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+#list {
+    display: none;
+    position: fixed;
+    top: 51rem;
+    width: 800px;
+    height: 100px;
+    border: 3px solid #000;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 500;
+}
+
+#list img {
+    width: 100px;
+}
+
+#list img.find {
+    filter: grayscale(1) contrast(1.5) brightness(0.8);
+}
+
+#list .number {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-size: 24px;
+}
+
+/* 아이템 모달창 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    text-align: center;
+    font-family: 'Galmuri7', sans-serif;
+}
+
+#modal-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+#modal-text {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#modal-close {
+    padding: 8px 20px;
+    font-size: 16px;
+    border: none;
+    background: #415162;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.time {
+    position:fixed;
+    top:1rem;
+    right:1rem;
+    font-size:24px;
+    z-index:9999;
+    display:none;
+}
+
+.ending-illustration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 998;
+}

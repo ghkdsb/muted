@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" />
+    </link>
+</head>
+
+<body>
+    <!-- 할머니 이동 -->
+    <div id="map">
+        <div class="box" data-direction="down" data-walking="false"></div>
+
+        <img class="sparkle sparkle1" src="img/반짝.gif" data-id="1">
+        <img class="sparkle sparkle2" src="img/반짝.gif" data-id="2">
+        <img class="sparkle sparkle3" src="img/반짝.gif" data-id="3">
+        <img class="sparkle sparkle4" src="img/반짝.gif" data-id="4">
+        <img class="sparkle sparkle5" src="img/반짝.gif" data-id="5">
+    </div>
+
+    <!-- 시작화면 요양사 -->
+    <div id="npc2"></div>
+
+    <!-- 대화창 -->
+    <div id="dialogue" class="dialogue-box">
+        <img src="img/대화창.png" alt="대화창" class="dialogue-bg">
+        <div class="dialogue-name">이름</div>
+        <p class="dialogue-text">대화창</p>
+    </div>
+
+
+    <!-- 아이템 찾기 -->
+    <div id="wrap">
+        <div id="list">
+            <!--똑같은 아이디를 부여해서 동일하게 만든 것-->
+            <img src="img/찢어진종이.png" data-id="1">
+            <img src="img/녹음기.png" data-id="2">
+            <img src="img/규정집.png" data-id="3">
+            <img src="img/썩은과일.png" data-id="4">
+            <img src="img/약.png" data-id="5">
+            <strong class="number">0/5</strong>
+        </div>
+    </div>
+
+    <!-- 아이템 모달창 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="아이템" />
+            <p id="modal-text">아이템 설명</p>
+            <button id="modal-close">닫기</button>
+        </div>
+    </div>
+
+    <!-- 타이머 -->
+    <div class="time">60</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
