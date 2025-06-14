@@ -6,20 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" />
-    </link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"></link>
 </head>
 
 <body>
     <!-- 할머니 이동 -->
-    <div id="map">
+    <img id="map">
         <div class="box" data-direction="down" data-walking="false"></div>
 
-        <img class="sparkle sparkle1" src="img/반짝.gif" data-id="1">
-        <img class="sparkle sparkle2" src="img/반짝.gif" data-id="2">
-        <img class="sparkle sparkle3" src="img/반짝.gif" data-id="3">
-        <img class="sparkle sparkle4" src="img/반짝.gif" data-id="4">
-        <img class="sparkle sparkle5" src="img/반짝.gif" data-id="5">
+        <img class="sparkle sparkle1" src="img/반짝.gif" alt="종이" data-id="1">
+        <img class="sparkle sparkle2" src="img/반짝.gif" alt="녹음기" data-id="2">
+        <img class="sparkle sparkle3" src="img/반짝.gif" alt="규정집" data-id="3">
+        <img class="sparkle sparkle4" src="img/반짝.gif" alt="썩은과일" data-id="4">
+        <img class="sparkle sparkle5" src="img/반짝.gif" alt="약" data-id="5">
     </div>
 
     <!-- 시작화면 요양사 -->
@@ -37,11 +36,11 @@
     <div id="wrap">
         <div id="list">
             <!--똑같은 아이디를 부여해서 동일하게 만든 것-->
-            <img src="img/찢어진종이.png" data-id="1">
-            <img src="img/녹음기.png" data-id="2">
-            <img src="img/규정집.png" data-id="3">
-            <img src="img/썩은과일.png" data-id="4">
-            <img src="img/약.png" data-id="5">
+            <img src="img/찢어진종이.png" alt="종이" data-id="1">
+            <img src="img/녹음기.png" alt="녹음기" data-id="2">
+            <img src="img/규정집.png" alt="규정집" data-id="3">
+            <img src="img/썩은과일.png" alt="썩은과일" data-id="4">
+            <img src="img/약.png" alt="약" data-id="5">
             <strong class="number">0/5</strong>
         </div>
     </div>
@@ -49,7 +48,7 @@
     <!-- 아이템 모달창 -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <img id="modal-image" src="" alt="아이템" />
+            <img id="modal-image" src="." alt="아이템" />
             <p id="modal-text">아이템 설명</p>
             <button id="modal-close">닫기</button>
         </div>
