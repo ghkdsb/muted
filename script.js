@@ -70,7 +70,7 @@ document.addEventListener('keydown', (e) => {
 
 
 
-// 카메라 이동 =========================================
+    // 카메라 이동 =========================================
 
     if (canMove) {
         centerCameraOnPlayer(); // 플레이어가 이동 했을 때 시점도 같이 이동
@@ -100,6 +100,7 @@ const dialogueBox = document.getElementById('dialogue');
 const dialogueText = dialogueBox.querySelector('.dialogue-text');
 const dialogueName = dialogueBox.querySelector('.dialogue-name');
 const listUI = document.getElementById('list');
+const dialogueSound = new Audio('sound/text.mp3');
 
 // 오프닝 대화창 대사
 const dialogues = [
@@ -114,41 +115,75 @@ const dialogues = [
 
 let dialogueIndex = 0;
 
-// 대사 출력
-function showDialogue() {
-    const [name, line] = dialogues[dialogueIndex];
-    dialogueName.innerText = name;
-    dialogueText.innerText = line;
+let isTyping = false;
+let typingTimeout;
+
+// 텍스트 키보드 효과
+function typeText(element, text, callback) {
+    element.innerHTML = '';
+    let i = 0;
+    isTyping = true;
+
+    function type() {
+        if (i < text.length) {
+            let char = text[i];
+            if (char === '\n') {
+                element.innerHTML += '<br>'; // 줄바꿈
+            } else {
+                element.innerHTML += char; // 일반 문자
+            }
+            i++;
+            typingTimeout = setTimeout(type, 40); // 속도
+        } else {
+            isTyping = false;
+            if (callback) callback();
+        }
+    }
+
+    type();
 }
 
-showDialogue();
+// 대사 출력
+function showDialogue() {
+    const [name, line] = isEnding ? endingLines[isEnding ? endingIndex : dialogueIndex] : dialogues[dialogueIndex];
+    dialogueName.innerText = name;
+    typeText(dialogueText, line);
+}
 
 // 대화창 클릭 시 다음 대사 나옴
 // 엔딩, 오프닝 같이 묶음
 dialogueBox.addEventListener('click', () => {
+    dialogueSound.currentTime = 0;
+    dialogueSound.play(); // 클릭 시 효과음 재생
+
+    if (isTyping) {
+        clearTimeout(typingTimeout);
+        const [name, line] = isEnding ? endingLines[endingIndex] : dialogues[dialogueIndex];
+        dialogueText.innerText = line;
+        isTyping = false;
+        return;
+    }
+
     if (isEnding) {
-        endingIndex++; // 엔딩
+        endingIndex++; // 엔딩대사창
         if (endingIndex < endingLines.length) {
-            const [name, line] = endingLines[endingIndex];
-            dialogueName.innerText = name;
-            dialogueText.innerText = line;
+            showDialogue();
         } else {
             dialogueBox.style.display = 'none';
             showGameOver();
         }
     } else {
-        dialogueIndex++; // 오프닝
+        dialogueIndex++; // 오프닝대사창
         if (dialogueIndex < dialogues.length) {
             showDialogue();
         } else {
             dialogueBox.style.display = 'none';
-            listUI.style.display = 'flex'; // 오프닝 대화창이 사라지면 리스트 등장
+            listUI.style.display = 'flex'; // 오프닝 대사창 사라지면 리스트 등장
 
-            startTimer(); // 오프닝 대화창이 사라지면 타이머 시작
+            startTimer(); // 오프닝 대사창 사라지면 타이머 시작
         }
     }
 });
-
 
 
 
@@ -194,11 +229,15 @@ const modalClose = document.getElementById('modal-close');
 
 
 // 반짝이 클릭하면 아이템 나오는 거
+const clickSound = new Audio('sound/click.mp3'); // 반짝이 클릭 효과음
+
 sparkleObjs.forEach(obj => {
     obj.addEventListener('click', () => {
         const id = obj.dataset.id;
 
         obj.style.display = 'none';
+        clickSound.currentTime = 0; // 재생 위치 초기화
+        clickSound.play(); // 효과음 재생
 
         count++;
         number.innerText = `${count} / ${totalItems}`;
@@ -315,5 +354,3 @@ function startEnding() {
     dialogueBox.style.display = 'flex';
     dialogueBox.style.zIndex = '999';
 }
-
-
