@@ -1,11 +1,15 @@
-window.scrollTo(1000, 1000);
+window.scrollTo(1000, 1000); // 사이트 열면 해당 좌표에서 시작
 
+// 플레이어 위치 설정 (키보드 누르면 이 좌표로 이동함)
 window.onload = () => {
     box.style.left = '2200px';
     box.style.top = '1330px';
 }
 
-// 할머니 이동
+
+
+// 할머니 이동 ========================================
+
 window.addEventListener('keydown', function (e) {
     const keys = ['w', 's', 'a', 'd'];
     if (keys.includes(e.key)) {
@@ -65,7 +69,8 @@ document.addEventListener('keydown', (e) => {
     box.dataset.walking = true // 키보드를 누르고 있으면 true, 떼고 있으면 false
 
 
-// 카메라 이동
+
+// 카메라 이동 =========================================
 
     if (canMove) {
         centerCameraOnPlayer(); // 플레이어가 이동 했을 때 시점도 같이 이동
@@ -88,13 +93,15 @@ function centerCameraOnPlayer() {
 }
 
 
-// 대화창
+
+// 대화창 ===============================
+
 const dialogueBox = document.getElementById('dialogue');
 const dialogueText = dialogueBox.querySelector('.dialogue-text');
 const dialogueName = dialogueBox.querySelector('.dialogue-name');
 const listUI = document.getElementById('list');
 
-// 대사 내용 배열
+// 오프닝 대화창 대사
 const dialogues = [
     ["노인", "( 나는 요양원에서 지내고 있다. )"],
     ["노인", "( 여기서는 매일 같은 하루가 반복되고... )"],
@@ -116,10 +123,11 @@ function showDialogue() {
 
 showDialogue();
 
-// 클릭 시 다음 대사
+// 대화창 클릭 시 다음 대사 나옴
+// 엔딩, 오프닝 같이 묶음
 dialogueBox.addEventListener('click', () => {
     if (isEnding) {
-        endingIndex++;
+        endingIndex++; // 엔딩
         if (endingIndex < endingLines.length) {
             const [name, line] = endingLines[endingIndex];
             dialogueName.innerText = name;
@@ -129,19 +137,23 @@ dialogueBox.addEventListener('click', () => {
             showGameOver();
         }
     } else {
-        dialogueIndex++;
+        dialogueIndex++; // 오프닝
         if (dialogueIndex < dialogues.length) {
             showDialogue();
         } else {
             dialogueBox.style.display = 'none';
-            listUI.style.display = 'flex';
-            startTimer();
+            listUI.style.display = 'flex'; // 오프닝 대화창이 사라지면 리스트 등장
+
+            startTimer(); // 오프닝 대화창이 사라지면 타이머 시작
         }
     }
 });
 
 
-// 오브젝트 찾기
+
+
+// 오브젝트 찾기 ============================================
+
 document.addEventListener('keyup', () => {
     box.dataset.walking = false
 })
@@ -158,8 +170,8 @@ const itemInfo = {
         text: '규정집의 찢어진 부분 같다.\n* 입소보증금을 받는 건 금지되어 있음. *'
     },
     2: {
-        img: 'img/녹음기.png',
-        text: '녹음기다. 녹음 기능은 잘 작동하는 것 같다.'
+        img: 'img/출근부.png',
+        text: '출근부야.\n이 날 이 간병인은 없었던 것 같은데...\n조작인걸까?'
     },
     3: {
         img: 'img/규정집.png',
@@ -180,6 +192,8 @@ const modalImg = document.getElementById('modal-image');
 const modalText = document.getElementById('modal-text');
 const modalClose = document.getElementById('modal-close');
 
+
+// 반짝이 클릭하면 아이템 나오는 거
 sparkleObjs.forEach(obj => {
     obj.addEventListener('click', () => {
         const id = obj.dataset.id;
@@ -216,12 +230,12 @@ let timeLimit = 60;
 function startTimer() {
     const timerArea = document.querySelector('.time');
     timerArea.style.display = 'block';
-    timerArea.innerText = `${timeLimit}초`; // 초기 출력
+    timerArea.innerText = `면회 오기 전 까지 : ${timeLimit}초`; // 초기 출력
 
     let timer = setInterval(() => {
         if (timeLimit > 0) {
             timeLimit--;
-            timerArea.innerText = `${timeLimit}초`; // 계속 갱신
+            timerArea.innerText = `면회 오기 전 까지 : ${timeLimit}초`; // 계속 갱신
         } else {
             clearInterval(timer);
             startEnding();
@@ -252,7 +266,7 @@ const endingDialogues = {
         ["요양원장", "모든 직원들은 교육을 수료했고, 식재료들은 모두 검수를 거칩니다.\n약도 저희가 꾸준히 잘 챙겨드리고 있고요."],
         ["요양원장", "아무래도 어르신께서 기억을 잘 못하시는 것 같습니다."],
         ["딸", "... 엄마, 정말이야?"],
-        ["노인", "(.....) ... 미안하다, 딸아."],
+        ["노인", "( ......... )"],
         ["", "누군가는 침묵했고, 누군가는 외면했고, 누군가는 이익을 선택했다."],
         ["", "Ending 1"],
     ],
@@ -275,7 +289,7 @@ const endingDialogues = {
 };
 
 function startEnding() {
-    // 게임 화면 숨기기
+    // 배경, 리스트, 시간 등등 다 숨기고 엔딩 이미지만 뜨게
     document.getElementById('list').style.display = 'none';
     document.querySelector('.time').style.display = 'none';
     document.getElementById('map').style.display = 'none';
@@ -284,16 +298,17 @@ function startEnding() {
     // 엔딩 이미지
     const endingImage = document.createElement('img');
     endingImage.src = 'img/엔딩.png';
-    endingImage.id = 'ending-illustration';
-    endingImage.classList.add('ending-illustration');
+    endingImage.id = 'ending-img';
+    endingImage.classList.add('ending-img');
     document.body.appendChild(endingImage);
 
     // 상태 전환
     isEnding = true;
     endingIndex = 0;
     endingLines = (count === totalItems) ? endingDialogues.success : endingDialogues.fail;
+    // 찾은 아이템 = 총 아이템 개수 라면 성공엔딩 출력하고 아니면 실패엔딩 출력
 
-    // 첫 대사 출력
+    // 대사 출력
     const [name, line] = endingLines[endingIndex];
     dialogueName.innerText = name;
     dialogueText.innerText = line;

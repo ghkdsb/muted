@@ -117,36 +117,36 @@
 
 /* 반짝이 위치 설정 */
 .sparkle {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-  z-index: 10;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .sparkle1 {
-  top: 1130px;
-  left: 155px;
+    top: 225px;
+    left: 2500px;
 }
 
 .sparkle2 {
-  top: 256px;
-  left: 544px;
+    top: 1340px;
+    left: 640px;
 }
 
 .sparkle3 {
-  top: 1105px;
-  left: 1205px;
+    top: 1105px;
+    left: 1205px;
 }
 
 .sparkle4 {
-  top: 1360px;
-  left: 2130px;
+    top: 1360px;
+    left: 2130px;
 }
 
 .sparkle5 {
-  top: 250px;
-  left: 1405px;
+    top: 250px;
+    left: 1405px;
 }
 
 ul {
@@ -238,15 +238,15 @@ ul {
 }
 
 .time {
-    position:fixed;
-    top:1rem;
-    right:1rem;
-    font-size:24px;
-    z-index:9999;
-    display:none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    z-index: 9999;
+    display: none;
 }
 
-.ending-illustration {
+.ending-img {
     position: fixed;
     top: 0;
     left: 0;
